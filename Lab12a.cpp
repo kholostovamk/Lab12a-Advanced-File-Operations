@@ -15,8 +15,9 @@ struct FileText
 int main () {
     fstream myFile;
     ofstream myFileOut;
-    string fileName;
-    
+    string fileName, fileName2; //for output/input name files
+    string contents;
+
     int arrayIndex = 0; //counter for the loop
     
     int lineNumber = 0; //initializing line number
@@ -29,12 +30,18 @@ int main () {
     int offset = 0;
     myFile.open(fileName.c_str()); // open file
 
-    while (getline(myFile, array)){
+    while (getline(myFile, contents)){
         lineNumber++;
         array[arrayIndex].lineNumber = lineNumber;
         array[arrayIndex].fileOffset = offset;
         arrayIndex++;
         offset = myFile.tellg();
         offset += lineNumber;
+        cout << "Input line" << lineNumber << ": " << contents << endl;      
     }
+    cout << lineNumber << " lines read from file " << fileName << endl;
+    cout << "Enter name of output-only file: " << endl;
+    cin >> fileName2;
+    myFileOut.open(fileName.c_str()); // open file for output
+    
 }
